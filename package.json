@@ -2,20 +2,27 @@
   "name": "react-homeworks",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
+    "@eslint/js": "^8.57.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
+    "vite": "^5.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "npm run eslint && npm run check-types",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "check-types": "tsc --noemit",
+    "eslint": "eslint"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +41,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "3.2.5",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^7.1.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-eslint-logger": "^1.1.0"
   }
 }
