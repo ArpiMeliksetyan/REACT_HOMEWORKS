@@ -1,8 +1,9 @@
 import "./App.css";
+import React from "react";
 import SearchForm from "./components/SearchForm";
 import Counter from "./components/Counter";
 import GenreSelect from "./components/GenreSelect";
-import React from "react";
+
 function App() {
   const listOfGenres: string[] = ["Comedy", "Melodrama", "Fantasy"];
   const initialValue: number = 0;
@@ -16,7 +17,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div role={"AppComponent"}>
       <Counter initialValue={initialValue} />
       <SearchForm
         initialSearchQuery="What do you want to watch?"

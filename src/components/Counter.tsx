@@ -61,10 +61,14 @@ export default function Counter({ initialValue }: ICounter) {
   }
 
   return (
-    <div>
+    <div role={"CounterComponent"}>
       <p>Count: {newValue}</p>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      <button role={"IncrementButton"} onClick={increment}>
+        Increment
+      </button>
+      <button role={"DecrementButton"} onClick={decrement}>
+        Decrement
+      </button>
     </div>
   );
 }

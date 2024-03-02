@@ -1,4 +1,5 @@
 import "./GenreSelect.css";
+import React from "react";
 
 interface IGenreSelect {
   genreNames: string[];
@@ -16,10 +17,12 @@ export default function GenreSelect({
   }
 
   return (
-    <div>
-      {genreNames.map((genreName, index) => (
-        <li key={index} className="genreList">
+    <div role={"GenreSelectComponent"}>
+      {genreNames?.map((genreName, index) => (
+        <li key={index}  className="genreList">
           <button
+              data-cy= "genreButton"
+            role={`${index}genreButton`}
             onClick={handleGenreButtonClick}
             className={
               selectedGenreName === genreName

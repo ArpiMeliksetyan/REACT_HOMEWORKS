@@ -27,8 +27,9 @@ export default function SearchForm({
   }
 
   return (
-    <div>
+    <div role={"SearchFormComponent"}>
       <input
+        role={"SearchInput"}
         className="searchInput searchInputText"
         type="text"
         value={searchQuery}
@@ -36,6 +37,7 @@ export default function SearchForm({
         onKeyDown={handleKeyDown}
       />
       <button
+        role={"SearchButton"}
         className="searchButton searchButtonText"
         onClick={handleSearchButtonClick}
       >

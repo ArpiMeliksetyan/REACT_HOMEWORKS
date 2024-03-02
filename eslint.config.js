@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     globals: {
       JSX: true,
@@ -22,7 +22,7 @@ export default [
       sourceType: "module",
     },
     plugins: ["react", "@typescript-eslint"],
-    ignorePatterns: ["test.*.ts", "test.*.tsx", "base64.ts"],
+    ignorePatterns: ["*.__tests__.ts", "*.__tests__.tsx", "base64.ts"],
 
     rules: {
       "react/react-in-jsx-scope": "off",

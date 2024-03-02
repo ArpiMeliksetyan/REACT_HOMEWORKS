@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.486">
+  <testsuite name="GenreSelect component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T14:07:34" time="0.689" tests="4">
+    <testcase classname="GenreSelect component should render correctly" name="GenreSelect component should render correctly" time="0.03">
+    </testcase>
+    <testcase classname="GenreSelect component should render all genres  provided in props" name="GenreSelect component should render all genres  provided in props" time="0.006">
+    </testcase>
+    <testcase classname="GenreSelect component should highligh selected prop passed in props" name="GenreSelect component should highligh selected prop passed in props" time="0.009">
+    </testcase>
+    <testcase classname="GenreSelect component should call onChange callback and passes correct genre in arguments after clicking on genre button" name="GenreSelect component should call onChange callback and passes correct genre in arguments after clicking on genre button" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="SearchForm component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T14:07:34" time="0.194" tests="4">
+    <testcase classname="SearchForm component should render correctly" name="SearchForm component should render correctly" time="0.01">
+    </testcase>
+    <testcase classname="SearchForm component should render initial value provided in props" name="SearchForm component should render initial value provided in props" time="0.002">
+    </testcase>
+    <testcase classname="SearchForm component should call onChange prop with proper value after typing to the input and click Search button" name="SearchForm component should call onChange prop with proper value after typing to the input and click Search button" time="0.012">
+    </testcase>
+    <testcase classname="SearchForm component should call onChange prop with proper value after typing to the input and click Enter key" name="SearchForm component should call onChange prop with proper value after typing to the input and click Enter key" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="Counter component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T14:07:35" time="0.152" tests="4">
+    <testcase classname="Counter component should render correctly" name="Counter component should render correctly" time="0.012">
+    </testcase>
+    <testcase classname="Counter component should render initial value provided in props" name="Counter component should render initial value provided in props" time="0.002">
+    </testcase>
+    <testcase classname="Counter component should decrement displayed value on click Decrement button" name="Counter component should decrement displayed value on click Decrement button" time="0.005">
+    </testcase>
+    <testcase classname="Counter component should increment displayed value on click Increment button" name="Counter component should increment displayed value on click Increment button" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="App component" errors="0" failures="0" skipped="0" timestamp="2024-03-01T14:07:35" time="0.142" tests="1">
+    <testcase classname="App component should render correctly" name="App component should render correctly" time="0.007">
+    </testcase>
+  </testsuite>
+</testsuites>
