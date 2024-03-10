@@ -1,0 +1,22 @@
+.dropDownContainer {
+    position: absolute;
+    height: 66px;
+    width: 215px;
+    right: 75px;
+    top: 150px;
+    background-color: #424242;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropDownButton {
+    color: white;
+    border: 0;
+    background-color: #424242;
+    height: 33px;
+    text-align: start;
+    padding-left: 8px;
+}
+.dropDownButton:hover {
+    background-color: #F65261;
+}

@@ -17,7 +17,7 @@ export default function GenreSelect({
   }
 
   return (
-    <div role={"GenreSelectComponent"}>
+    <div className="genreContainer" role={"GenreSelectComponent"}>
       {genreNames?.map((genreName, index) => (
         <li key={index}  className="genreList">
           <button
