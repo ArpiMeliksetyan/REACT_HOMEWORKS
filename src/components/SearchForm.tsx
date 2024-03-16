@@ -27,7 +27,8 @@ export default function SearchForm({
   }
 
   return (
-    <div className="searchFormContainer" role={"SearchFormComponent"}>
+    <div
+         className="searchFormContainer" role={"SearchFormComponent"}>
       <input
         role={"SearchInput"}
         className="searchInput searchInputText"

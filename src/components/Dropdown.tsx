@@ -4,13 +4,13 @@ import "../components/DropDown.css"
 import { CurrentSelection } from "./SortControl";
 
 interface IDropDown {
-    setCurrentSelection: (value: (((prevState: CurrentSelection) => CurrentSelection) | CurrentSelection)) => void
+    setCurrentSelection: (newValue: CurrentSelection ) => void
 }
 
 export default function Dropdown({ setCurrentSelection }: IDropDown) {
     return (
         <div className="dropDownContainer">
-            {sortingTypes.map(type => <button onClick={() => setCurrentSelection(type as CurrentSelection)}
+            {sortingTypes.map(type => <button onClick={() => setCurrentSelection}
                                               className="dropDownButton">{type}</button>)}
         </div>
     )

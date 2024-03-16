@@ -12,11 +12,20 @@ export interface IMovieTile {
 }
 
 export default function MovieTile({
-                                      movie: { imgUrl, movieName, releaseYear, relevantGenres },
+                                      movie: { imgUrl, movieName, releaseYear, relevantGenres, description, rating, duration },
                                       onClickDetails
                                   }: IMovieTile) {
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const movie = {
+        imgUrl,
+        movieName,
+        releaseYear,
+        relevantGenres,
+        description,
+        rating,
+        duration
+    }
 
     function handleOnMouseOver() {
         setIsFocused(true);
@@ -38,7 +47,6 @@ export default function MovieTile({
                 onMouseOver={handleOnMouseOver}
                 onMouseOut={handleOnMouseOut}
                 onClick={onClickDetails}>
-
                 <img
                     className="movieImage"
                     src={imgUrl}
@@ -53,7 +61,7 @@ export default function MovieTile({
                             alt="PopupButton"/>
                     </span>
                 }
-                {(isModalOpen) && <ContextMenuModal setIsModalOpen={setIsModalOpen}/>}
+                {(isModalOpen) && <ContextMenuModal movie={movie} setIsModalOpen={setIsModalOpen}/>}
                 <div className="movieDetails">
                     <span className="movieName">{movieName}</span>
                     <span className="movieReleaseYear">{releaseYear}</span>

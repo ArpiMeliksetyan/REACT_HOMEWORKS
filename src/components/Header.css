@@ -1,0 +1,41 @@
+.headerContainer {
+    background-image: url("../assets/images/Header.png");
+    height: 396px;
+    display: flex;
+    flex-direction: column ;
+    margin: 30px 30px 10px 30px;
+}
+
+.header {
+    display: flex;
+    height: 46px;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px 40px 0 40px
+}
+
+.headerLogo {
+    width: 130px;
+    height: 15px;
+}
+
+.headerText {
+    color: white;
+    font-size: 35px;
+    padding-left: 100px;
+    padding-top: 30px;
+    opacity: 0.7;
+    font-family: Montserrat, serif;
+    font-weight: 5;
+    letter-spacing: 2px;
+}
+
+.addButton {
+    height: 40px;
+    width: 130px;
+    background-color: rgba(66, 66, 66, 0.76);
+    opacity: 0.7;
+    color: #F65261;
+    border: none;
+    padding: -10px;
+}
