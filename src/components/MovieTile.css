@@ -1,0 +1,54 @@
+.movieButtonContainer {
+    width: 322px;
+    list-style-type: none;
+    position: relative;
+    padding: 25px;
+}
+
+.movieTileButton {
+    border-width: 0;
+    background-color: #232323;
+}
+
+.movieImage {
+    height: 455px;
+    width: 322px;
+}
+
+.popupButton {
+    all: unset;
+    position: absolute;
+    right: 25px;
+    top: 35px;
+}
+
+.popupImagine {
+    height: 25px;
+    width: 25px;
+}
+
+.movieReleaseYear {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 2px;
+    color: #FFFFFF;
+    opacity: 50%;
+}
+
+.movieDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.relevantGenre {
+    display: flex;
+    justify-content: start;
+    color: #FFFFFF;
+    opacity: 50%;
+}
+
+.movieName {
+    color: #FFFFFF;
+    opacity: 70%;
+}

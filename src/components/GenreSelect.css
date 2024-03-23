@@ -1,7 +1,7 @@
 .genreList {
   list-style: none;
   display: inline-block;
-  margin: 0 10px;
+  padding: 0 10px;
 }
 
 .genreButton {
@@ -9,12 +9,18 @@
   border: none;
   padding: 0;
   cursor: default;
+  color: white;
 }
 
 .selected {
   background-color: blue;
-  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
+}
+
+.genreContainer {
+  background-color: #232323;
+  padding: 10px 0 0 30px;
+  margin: 0 30px 0 30px;
 }

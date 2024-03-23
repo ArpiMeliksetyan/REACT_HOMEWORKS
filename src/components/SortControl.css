@@ -1,0 +1,25 @@
+.sortControlContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.sortByButton {
+    color: white;
+    font-size: 15px;
+    background-color: #232323;
+    border: 0;
+}
+
+.sortBy {
+    color: white;
+    font-size: 15px;
+    padding-right: 20px;
+}
+
+.arrow {
+    padding-left: 5px;
+    height: 12px;
+    width: 12px;
+}

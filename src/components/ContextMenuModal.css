@@ -1,0 +1,41 @@
+.contextMenu {
+    height: 111px;
+    width: 190px;
+    background-color: #232323;
+    position: absolute;
+    top: 30px;
+    right: 25px;
+}
+
+.closeButton {
+    background-color: #232323;
+    border-width: 0;
+    color: white;
+    display: inline;
+    padding-left: 160px;
+}
+
+.contextMenuModalButton {
+    color: white;
+    background-color: #232323;
+    border-width: 0;
+    height: 33px;
+    text-align: start;
+    padding-left: 20px;
+}
+
+.editAndDeleteContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.selectedContextMenuButton:hover {
+    background-color: #F65261;
+}
+
+.closeButtonImg {
+    width: 15px;
+    height: 15px;
+    padding-left: 8px;
+}

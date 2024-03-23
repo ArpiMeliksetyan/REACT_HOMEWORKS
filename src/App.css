@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.moviesList {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0 10px;
+  background-color: #232323;
+  margin: 0 30px 0 30px;
+}
+
+.result {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  background-color: #232323;
+  margin: 0 30px 0 30px;
+  justify-content: space-between;
+}
+
+
