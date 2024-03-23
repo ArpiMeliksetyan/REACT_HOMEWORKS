@@ -12,11 +12,20 @@ export interface IMovieTile {
 }
 
 export default function MovieTile({
-                                      movie: { imgUrl, movieName, releaseYear, relevantGenres, description, rating, duration },
+                                      movie: {
+                                          poster_path: imgUrl,
+                                          title: movieName,
+                                          release_date: releaseDate,
+                                          genres: relevantGenres,
+                                          overview: description,
+                                          vote_average: rating,
+                                          runtime: duration
+                                      },
                                       onClickDetails
-                                  }: IMovieTile) {
+                                  }) {
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const releaseYear = releaseDate.split('-')[0];
     const movie = {
         imgUrl,
         movieName,

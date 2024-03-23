@@ -6,7 +6,6 @@ import Avengers from "../assets/images/Avengers.png";
 import Inception from "../assets/images/Inception.png"
 
 
-
 export interface IMovie{
     imgUrl: string,
     movieName: string,

@@ -8,19 +8,21 @@ interface IMovieDetails{
 
 export default function MovieDetails({
                                          movie: {
-                                             imgUrl,
-                                             movieName,
-                                             releaseYear,
-                                             rating,
-                                             duration,
-                                             description,
-                                             relevantGenres
+                                             poster_path: imgUrl,
+                                             title: movieName,
+                                             release_date: releaseDate,
+                                             genres: relevantGenres,
+                                             overview: description,
+                                             vote_average: rating,
+                                             runtime: duration
                                          },
                                          setMovieIndex,
                                      }: IMovieDetails) {
     function handleOnClick(){
         setMovieIndex(-1);
     }
+    const releaseYear = releaseDate.split('-')[0];
+
     return (
         <div className="mainContainer">
             <div className="movieHeader">
