@@ -1,0 +1,36 @@
+
+.result {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    background-color: #232323;
+    margin: 0 30px 0 30px;
+    justify-content: space-between;
+}
+
+.headerContainer {
+    background-image: url("../assets/images/Header.png");
+    height: 396px;
+    display: flex;
+    flex-direction: column ;
+    margin: 30px 30px 10px 30px;
+}
+
+.headerText {
+    color: white;
+    font-size: 35px;
+    padding-left: 100px;
+    padding-top: 30px;
+    opacity: 0.7;
+    font-family: Montserrat, serif;
+    font-weight: 5;
+    letter-spacing: 2px;
+}
+
+.moviesList {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 10px;
+    background-color: #232323;
+    margin: 0 30px 0 30px;
+}

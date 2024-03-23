@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SearchForm from "../SearchForm";
 
@@ -41,7 +41,7 @@ describe("SearchForm component", () => {
     expect(screen.getByDisplayValue(newQuery)).toBeInTheDocument();
     expect(onSearchMocked).toHaveBeenCalledWith(newQuery);
   });
-  it("should call onChange prop with proper value after typing to the input and click Enter key", () => {
+  it("should call onChange prop with proper value after typing to the input and click Enter key", async () => {
     const newQuery = "New Query";
     render(
       <SearchForm
@@ -50,10 +50,11 @@ describe("SearchForm component", () => {
       />
     );
     const input = screen.getByRole("SearchInput");
+
     fireEvent.change(input, { target: { value: newQuery } });
     input.focus();
     userEvent.keyboard("{enter}");
     expect(screen.getByDisplayValue(newQuery)).toBeInTheDocument();
-    expect(onSearchMocked).toHaveBeenCalledWith(newQuery);
+    await waitFor(() =>expect(onSearchMocked).toHaveBeenCalledWith(newQuery));
   });
 });

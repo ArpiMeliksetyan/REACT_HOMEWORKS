@@ -1,9 +1,6 @@
 .movieDetailsContainer {
     display: flex;
     flex-direction: row;
-    padding: 50px 40px;
-    background-color: #232323;
-    margin: 30px 30px 10px 30px;
 }
 
 .movieTitle {
@@ -68,4 +65,32 @@
     height: 292px;
     font-family: Montserrat, serif;
     line-height: 24px;
+}
+
+.mainLogo {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #F65261;
+    cursor: pointer;
+    font-weight: 200;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #232323;
+    margin: 30px 30px 10px 30px;
+    padding: 30px 40px;
+}
+
+.movieHeader {
+    display: flex;
+    height: 46px;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.movieSearchButton {
+    border: none;
+    background: none;
 }

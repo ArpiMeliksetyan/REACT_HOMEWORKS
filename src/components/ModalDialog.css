@@ -1,0 +1,42 @@
+.modalDialog {
+    background-color: #232323;
+    height: 750px;
+    width: 976px;
+    position: absolute;
+    top: 200px;
+    left: 130px;
+    padding-left: 30px;
+}
+
+.deleteModalDialog{
+    background-color: #232323;
+    width: 600px;
+    height: 350px;
+    position: absolute;
+    top: 300px;
+    left: 300px;
+    padding-left: 30px;
+}
+
+.dialogTitle {
+    color: white;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.modalCloseButton {
+    background-color: #232323;
+    border-width: 0;
+    display: inline;
+    height: 20px;
+    width: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.dialogHeader {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
