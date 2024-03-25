@@ -1,5 +1,5 @@
 .searchFormContainer {
-  padding: 30px 30px 10px 30px;
+  padding: 50px 0px 80px 100px;
 }
 
 .searchButton {
@@ -26,7 +26,7 @@
 .searchInput {
   width: 713px;
   height: 57px;
-  opacity: 0.7;
+  opacity: 0.5;
   background-color: #323232cc;
   border-radius: 5px;
   border-width: 0;
@@ -41,3 +41,6 @@
   font-size: 20px;
   font-weight: 400;
 }
+
+
+

@@ -1,0 +1,21 @@
+.deleteButton {
+    width: 182px;
+    height: 57px;
+    background-color: #F65261;
+    border-radius: 3px;
+    color: white;
+    border: none;
+}
+
+.deleteConfirmation {
+    color: white;
+    font-weight: normal;
+}
+
+.deleteButtonContainer {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    padding-right: 70px;
+    padding-top: 50px;
+}

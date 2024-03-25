@@ -1,5 +1,6 @@
-import "../components/SortControl.css"
-import Arrow from "../assets/images/Arrow.png"
+import "../components/SortControl.css";
+import Arrow from "../assets/images/Arrow.png";
+import React from "react";
 
 export enum CurrentSelection {
     RELEASE_DATE = "RELEASE DATE",
