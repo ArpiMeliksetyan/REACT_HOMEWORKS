@@ -1,30 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SearchForm.css";
+import { useSearchParams } from "react-router-dom";
 
 interface ISearchForm {
-    searchQuery: string;
-    setSearchQuery: (value: string) => void;
     onSearch: (value: string) => void;
 }
 
 export default function SearchForm({
-                                       searchQuery,
-                                       setSearchQuery,
                                        onSearch,
                                    }: ISearchForm) {
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-        setSearchQuery(event.target.value);
+        setSearchParams((prev) => {
+            prev.set("search", event.target.value);
+            if (!event.target.value){
+                prev.delete("search");
+            }
+            return prev;
+        });
     }
 
     function handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
         if (event.key === "Enter") {
-            onSearch(searchQuery);
+            onSearch(searchParams.get('search'));
         }
     }
 
     function handleSearchButtonClick(): void {
-        onSearch(searchQuery);
+        onSearch(searchParams.get('search'));
     }
 
     return (
@@ -34,7 +39,7 @@ export default function SearchForm({
                 role={"SearchInput"}
                 className="searchInput searchInputText"
                 type="text"
-                value={searchQuery}
+                value={searchParams.get('search')}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 placeholder='What do you want to watch?'
