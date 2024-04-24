@@ -1,29 +1,28 @@
 import "./GenreSelect.css";
 import React from "react";
+import { useSearchParams } from "react-router-dom";
+export const listOfGenres: string[] = ["ALL", "ADVENTURE", "COMEDY", "HORROR", "CRIME"];
 
-interface IGenreSelect {
-    genreNames: string[];
-    selectedGenreName: string;
-}
+export default function GenreSelect() {
 
-export default function GenreSelect({
-                                        genreNames,
-                                        setActiveGenre,
-                                        activeGenre
-                                    }: IGenreSelect) {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     function handleGenreButtonClick(genreName: string): void {
-        setActiveGenre(genreName);
+        setSearchParams((prev) => {
+            prev.set("activeGenre", genreName);
+            return prev;
+        });
     }
     return (
         <div className="genreContainer" role={"GenreSelectComponent"}>
-            {genreNames?.map((genreName, index) => (
+            {listOfGenres?.map((genreName, index) => (
                 <li key={index} className="genreList">
                     <button
                         data-cy="genreButton"
                         role={`${index}genreButton`}
                         onClick={()=>handleGenreButtonClick(genreName)}
                         className={
-                            activeGenre === genreName
+                            (searchParams.get('activeGenre') ?? listOfGenres[0]) === genreName
                                 ? "genreButton selected"
                                 : "genreButton"
                         }
