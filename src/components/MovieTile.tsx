@@ -2,34 +2,29 @@ import React, { useState } from "react";
 import PopupButton from "../assets/images/PopupButton.png"
 import ContextMenuModal from "./ContextMenuModal";
 import "../components/MovieTile.css"
-import { IMovie } from "./Movies";
-
-
-export interface IMovieTile {
-    movie: IMovie,
-    onClickDetails: () => void,
-
-}
 
 export default function MovieTile({
                                       movie: {
+                                          id,
                                           poster_path: imgUrl,
                                           title: movieName,
                                           release_date: releaseDate,
                                           genres: relevantGenres,
                                           overview: description,
                                           vote_average: rating,
-                                          runtime: duration
+                                          runtime: duration,
                                       },
-                                      onClickDetails
+                                      onClickDetails,
+                                      setIsEdited
                                   }) {
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const releaseYear = releaseDate.split('-')[0];
     const movie = {
+        id,
         imgUrl,
         movieName,
-        releaseYear,
+        releaseDate,
         relevantGenres,
         description,
         rating,
@@ -70,7 +65,7 @@ export default function MovieTile({
                             alt="PopupButton"/>
                     </span>
                 }
-                {(isModalOpen) && <ContextMenuModal movie={movie} setIsModalOpen={setIsModalOpen}/>}
+                {(isModalOpen) && <ContextMenuModal movie={movie} setIsModalOpen={setIsModalOpen} setIsEdited={setIsEdited}/>}
                 <div className="movieDetails">
                     <span className="movieName">{movieName}</span>
                     <span className="movieReleaseYear">{releaseYear}</span>

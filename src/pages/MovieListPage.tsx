@@ -7,13 +7,15 @@ import "./MovieListPage.css";
 import MovieTile from "../components/MovieTile";
 import Footer from "../components/Footer";
 import { getMovies } from "../services/fetchData";
-import { Link, Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 
 
 export default function MovieListPage() {
+    const [isEdited, setIsEdited] = useState<boolean>(false);
     const [searchParams] = useSearchParams();
     const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
     const [movies, setMovies] = useState();
+    const navigate = useNavigate();
 
     const activeGenre = searchParams.get('activeGenre');
     const sortBy = searchParams.get('sortBy');
@@ -35,23 +37,30 @@ export default function MovieListPage() {
         setIsOpenDropDown(!isOpenDropDown);
     }
 
+    function handleClickDetails(id): void {
+        navigate(`/${id}`)
+    }
+
     useEffect(() => {
         requestMovies();
     }, [requestMovies])
 
     return (
         <div>
-            <Outlet/>
+            <Outlet context={{movies, isEdited, setIsEdited}}/>
             <div className="result">
                 <GenreSelect/>
                 <SortControl onSelect={handleSelect}/>
             </div>
             {isOpenDropDown && <Dropdown/>}
             <ol className="moviesList">
-                {movies?.map((movie, index) =>
-                        <Link to={`/${movie.id}`} key={index}>
-                            <MovieTile movie={movie} />
-                        </Link>
+                {movies?.map((movie) =>
+                    <MovieTile
+                        key={movie.id}
+                        movie={movie}
+                        onClickDetails={() => handleClickDetails(movie.id)}
+                        setIsEdited={setIsEdited}
+                    />
                 )}
             </ol>
             <Footer/>
