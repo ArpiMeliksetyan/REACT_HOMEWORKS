@@ -2,17 +2,16 @@ import React, {useEffect} from "react";
 import "./MovieForm.css";
 import { useForm } from "react-hook-form";
 import { addMovie, editMovie } from "../services/fetchData";
-import { IMovie, movies } from "./Movies";
+import { IMovie } from "./Movies";
 import { mapUIMovieToBackendMovie } from "../helpers/mapper";
-import { useOutletContext } from "react-router-dom";
+import {  useParams } from "next/navigation";
 
 
-export default function MovieForm({ isAddMovie }) {
-    const context = useOutletContext();
-    let movie = context?.movie;
+export default function MovieForm({ isAddMovie, movie, setIsAddedMovie, setIsEdited, handleOnClose }) {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-    const movieId = window.location.pathname.split("/")[1];
 
+    const params = useParams();
+console.log(1111,isAddMovie);
 
     useEffect(() => {
         if (movie) {
@@ -29,7 +28,7 @@ export default function MovieForm({ isAddMovie }) {
         if (isAddMovie) {
             try {
                 await addMovie(backendMovie);
-                context?.setIsAddedMovie(true);
+                setIsAddedMovie(true);
             } catch (err) {
                 const message = `Something went wrong during movie adding. Please try again. Error: ${err?.message}`;
                 throw new Error(message);
@@ -38,17 +37,18 @@ export default function MovieForm({ isAddMovie }) {
         } else {
             try {
                 const backendMovie = mapUIMovieToBackendMovie(data);
-                backendMovie.id = Number(movieId);
+                backendMovie.id = Number(params?.movieId);
                 await editMovie(backendMovie);
-                context?.setIsEdited(false);
+                setIsEdited(false);
             } catch (err) {
                 const message = `Something went wrong during movie editing. Please try again. Error: ${err?.message}`;
                 throw new Error(message);
             }
 
         }
-        context?.handleOnClose();
+        handleOnClose();
     }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="formColumn">

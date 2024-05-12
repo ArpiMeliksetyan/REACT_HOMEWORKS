@@ -1,6 +1,6 @@
-import React from "react";
-import "./SearchForm.css";
-import { useSearchParams } from "react-router-dom";
+import React, { useCallback } from "react";
+import "../components/SearchForm.css";
+import { useSearchParams, usePathname, useRouter, } from "next/navigation";
 
 interface ISearchForm {
     onSearch: (value: string) => void;
@@ -10,16 +10,36 @@ export default function SearchForm({
                                        onSearch,
                                    }: ISearchForm) {
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const createQueryString = useCallback(
+        (name: string, value: string) => {
+            const params = new URLSearchParams(searchParams.toString())
+            if (!value){
+                params.delete(name);
+                return '';
+            }
+
+            params.set(name, value);
+            return params.toString();
+
+        },
+        [searchParams]
+    );
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-        setSearchParams((prev) => {
-            prev.set("search", event.target.value);
-            if (!event.target.value){
-                prev.delete("search");
-            }
-            return prev;
-        });
+        const newSearchParams = createQueryString("search", event.target.value);
+        router.push(pathname + newSearchParams? ('?' + newSearchParams) : '');
+
+        // setSearchParams((prev) => {
+        //     prev.set("search", event.target.value);
+        //     if (!event.target.value){
+        //         prev.delete("search");
+        //     }
+        //     return prev;
+        // });
     }
 
     function handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {

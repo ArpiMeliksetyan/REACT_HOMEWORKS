@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import MovieListPage from "./pages/MovieListPage";
+import MovieListPage from "./components/MovieListPage";
 
 
 const App = () => (

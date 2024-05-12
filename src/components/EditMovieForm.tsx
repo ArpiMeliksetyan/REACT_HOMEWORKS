@@ -1,10 +1,9 @@
 import "./MovieForm.css";
 import MovieForm from "./MovieForm";
-import { useOutletContext } from "react-router-dom";
 
 
-export default function EditMovieForm() {
+export default function EditMovieForm({movie, setIsEdited, handleOnClose}) {
     return (
-        <MovieForm isAddMovie={false}/>
+        <MovieForm isAddMovie={false} movie={movie} handleOnClose={handleOnClose} setIsEdited={setIsEdited}/>
     )
 }
