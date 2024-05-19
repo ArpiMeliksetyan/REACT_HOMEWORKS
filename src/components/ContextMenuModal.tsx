@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import "./ContextMenuModal.css"
 import closeButton from "../assets/images/closeButton.png"
 import ModalDialog from "./ModalDialog";
@@ -6,7 +6,7 @@ import { useState } from "react";
 import DeleteMovieForm from "./DeleteMovieForm";
 import { useRouter } from "next/navigation";
 
-export default function ContextMenuModal({ movie, setIsModalOpen, setIsEdited, isEdited }) {
+export default function ContextMenuModal({ movie, setIsModalOpen, setIsEdited }) {
     const [isDeleted, setIsDeleted] = useState<boolean>(false);
     const router = useRouter();
 

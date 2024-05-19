@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import netflixroulette from "../../assets/images/netflixroulette.png";
 import ModalDialog from "../ModalDialog";
 import CongratulationsModal from "../CongratulationsModal";
-import { getMovieById } from "../../services/fetchData";
-import { mapBackendMovieToUIMovie } from "../../helpers/mapper";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import AddMovieForm from "../AddMovieForm";
-import EditMovieForm from "../EditMovieForm";
+import '../Header.css';
 
 const Header = () => {
     const [isAddMovie, setIsAddMovie] = useState<boolean>(false);

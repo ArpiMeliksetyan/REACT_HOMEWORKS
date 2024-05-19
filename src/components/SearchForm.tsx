@@ -1,76 +1,70 @@
 import React, { useCallback } from "react";
 import "../components/SearchForm.css";
-import { useSearchParams, usePathname, useRouter, } from "next/navigation";
+import { useRouter } from "next/router";
 
 interface ISearchForm {
     onSearch: (value: string) => void;
+    searchParams: {
+        search?: string;
+    };
 }
 
-export default function SearchForm({
-                                       onSearch,
-                                   }: ISearchForm) {
-
-    const searchParams = useSearchParams();
+const SearchForm: React.FC<ISearchForm> = ({ onSearch, searchParams }) => {
     const router = useRouter();
-    const pathname = usePathname();
 
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString())
-            if (!value){
-                params.delete(name);
-                return '';
-            }
-
-            params.set(name, value);
-            return params.toString();
-
-        },
-        [searchParams]
-    );
-
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-        const newSearchParams = createQueryString("search", event.target.value);
-        router.push(pathname + newSearchParams? ('?' + newSearchParams) : '');
-
-        // setSearchParams((prev) => {
-        //     prev.set("search", event.target.value);
-        //     if (!event.target.value){
-        //         prev.delete("search");
-        //     }
-        //     return prev;
-        // });
-    }
-
-    function handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
-        if (event.key === "Enter") {
-            onSearch(searchParams.get('search'));
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const searchValue = event.target.value;
+        const newSearchParams = new URLSearchParams(router.query as any);
+        if (searchValue) {
+            newSearchParams.set("search", searchValue);
+        } else {
+            newSearchParams.delete("search");
         }
-    }
 
-    function handleSearchButtonClick(): void {
-        onSearch(searchParams.get('search'));
-    }
+        router.replace({
+            pathname: router.pathname,
+            query: newSearchParams.toString() ? newSearchParams : undefined as any,
+        });
+
+        onSearch(searchValue);
+    }, [router, onSearch]);
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        if (typeof window !== "undefined") {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const searchInput = form.querySelector('input[name="search"]') as HTMLInputElement;
+            const searchTerm = searchInput.value;
+
+            const url = new URL(window.location.href);
+            url.searchParams.set('search', searchTerm);
+            window.history.pushState({}, '', url.toString());
+            onSearch(searchTerm);
+
+        }
+    };
 
     return (
-        <div
-            className="searchFormContainer" role={"SearchFormComponent"}>
+        <form action="/" method="GET" onSubmit={handleSubmit} className="searchFormContainer" role="SearchFormComponent">
             <input
-                role={"SearchInput"}
+                role="SearchInput"
                 className="searchInput searchInputText"
                 type="text"
-                value={searchParams.get('search')}
+                name="search"
+                defaultValue={searchParams.search || ''}
                 onChange={handleChange}
-                onKeyDown={handleKeyDown}
-                placeholder='What do you want to watch?'
+                placeholder="What do you want to watch?"
             />
             <button
-                role={"SearchButton"}
+                role="SearchButton"
                 className="searchButton searchButtonText"
-                onClick={handleSearchButtonClick}
+                type="submit"
             >
                 SEARCH
             </button>
-        </div>
+        </form>
     );
-}
+};
+
+export default SearchForm;
+

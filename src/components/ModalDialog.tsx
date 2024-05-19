@@ -3,8 +3,14 @@ import "./ModalDialog.css";
 import closeButton from "../assets/images/closeButton.png";
 import React from "react";
 
-
-export default function ModalDialog({ isDeleted, title, children, onClose, isAdded }) {
+interface IModalDialog {
+    isDeleted?: string;
+    title: string;
+    children: any;
+    onClose: (event: any) => void;
+    isAdded?: boolean;
+}
+export default function ModalDialog({ isDeleted, title, children, onClose, isAdded }: IModalDialog) {
 
 
     return (

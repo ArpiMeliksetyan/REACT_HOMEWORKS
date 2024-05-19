@@ -1,17 +1,24 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./MovieForm.css";
 import { useForm } from "react-hook-form";
 import { addMovie, editMovie } from "../services/fetchData";
 import { IMovie } from "./Movies";
 import { mapUIMovieToBackendMovie } from "../helpers/mapper";
-import {  useParams } from "next/navigation";
+import { useParams } from "next/navigation";
+
+interface IMovieForm {
+    isAddMovie: boolean;
+    movie?: any;
+    setIsAddedMovie?: (value: boolean) => void;
+    setIsEdited?: (value: boolean) => void;
+    handleOnClose: any;
+}
 
 
-export default function MovieForm({ isAddMovie, movie, setIsAddedMovie, setIsEdited, handleOnClose }) {
+export default function MovieForm({ isAddMovie, movie, setIsAddedMovie, setIsEdited, handleOnClose }: IMovieForm) {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
     const params = useParams();
-console.log(1111,isAddMovie);
 
     useEffect(() => {
         if (movie) {
@@ -28,7 +35,7 @@ console.log(1111,isAddMovie);
         if (isAddMovie) {
             try {
                 await addMovie(backendMovie);
-                setIsAddedMovie(true);
+                setIsAddedMovie?.(true);
             } catch (err) {
                 const message = `Something went wrong during movie adding. Please try again. Error: ${err?.message}`;
                 throw new Error(message);
@@ -39,7 +46,7 @@ console.log(1111,isAddMovie);
                 const backendMovie = mapUIMovieToBackendMovie(data);
                 backendMovie.id = Number(params?.movieId);
                 await editMovie(backendMovie);
-                setIsEdited(false);
+                setIsEdited?.(false);
             } catch (err) {
                 const message = `Something went wrong during movie editing. Please try again. Error: ${err?.message}`;
                 throw new Error(message);

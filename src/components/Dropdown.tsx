@@ -16,27 +16,23 @@ export default function Dropdown() {
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString())
-            params.set(name, value)
+            const params = new URLSearchParams(searchParams?.toString() || "");
 
-            return params.toString()
+            params.set(name, value);
+
+                return params.toString();
         },
         [searchParams]
     );
 
 
-    function handleDropdownClick(type) {
+    function handleDropdownClick(type: string) {
         router.push(pathname + '?' + createQueryString("sortBy", sortingSearchMap[type]))
-
-        // setSearchParams((prev) => {
-        //     prev.set("sortBy", sortingSearchMap[type]);
-        //     return prev;
-        // });
     }
 
     return (
         <div className="dropDownContainer">
-            {sortingTypes.map(type => <button onClick={() => handleDropdownClick(type)}
+            {sortingTypes.map(type => <button key={type} onClick={() => handleDropdownClick(type)}
                                               className="dropDownButton">{type}</button>)}
         </div>
     )

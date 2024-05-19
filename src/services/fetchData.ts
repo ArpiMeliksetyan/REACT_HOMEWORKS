@@ -62,46 +62,6 @@ const editMovie = async (movie: IBackendMovie) => {
     }
 };
 
-// const getMovies = async ({ sortBy, sortOrder, searchBy, filter, search }: ISearchParams) => {
-//     const { data: { data } } = await axios({
-//         method: 'get',
-//         url: `http://localhost:4000/movies`,
-//         params: { sortBy, sortOrder, searchBy, filter, search }
-//     });
-//
-//     return data;
-// }
-
-// const getMovieById = async ({ id }) => {
-//     const { data } = await axios({
-//         method: 'get',
-//         url: `http://localhost:4000/movies/${id}`,
-//     });
-//
-//     return data;
-// }
-
-// const addMovie = async (movie: IBackendMovie) => {
-//     const { data } = await axios({
-//         method: 'post',
-//         url: `http://localhost:4000/movies`,
-//         data: movie,
-//     });
-//
-//     return data;
-// }
-
-// const editMovie = async (movie: IBackendMovie) => {
-//     const { data } = await axios({
-//         method: 'put',
-//         url: `http://localhost:4000/movies`,
-//         data: movie,
-//     });
-//     return data;
-//
-// }
-
-
 export {
     getMovies,
     getMovieById,

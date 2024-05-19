@@ -6,7 +6,6 @@ export const listOfGenres: string[] = ["ALL", "ADVENTURE", "COMEDY", "HORROR", "
 
 export default function GenreSelect() {
 
-    // const [searchParams, setSearchParams] = useSearchParams();
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -25,10 +24,6 @@ export default function GenreSelect() {
     function handleGenreButtonClick(genreName: string): void {
         router.push(pathname + '?' + createQueryString("activeGenre", genreName))
 
-        // setSearchParams((prev) => {
-        //     prev.set("activeGenre", genreName);
-        //     return prev;
-        // });
     }
     return (
         <div className="genreContainer" role={"GenreSelectComponent"}>
