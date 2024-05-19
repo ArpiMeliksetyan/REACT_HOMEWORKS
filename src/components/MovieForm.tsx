@@ -1,53 +1,141 @@
+import React, {useEffect} from "react";
 import "./MovieForm.css";
+import { useForm } from "react-hook-form";
+import { addMovie, editMovie } from "../services/fetchData";
+import { IMovie, movies } from "./Movies";
+import { mapUIMovieToBackendMovie } from "../helpers/mapper";
+import { useOutletContext } from "react-router-dom";
 
 
-export default function MovieForm({ movie, handleSubmit}) {
+export default function MovieForm({ isAddMovie }) {
+    const context = useOutletContext();
+    let movie = context?.movie;
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const movieId = window.location.pathname.split("/")[1];
+
+
+    useEffect(() => {
+        if (movie) {
+            setValue("movieName", movie.movieName);
+            setValue("duration", movie.duration);
+            setValue("description", movie.description);
+            setValue("imgUrl", movie.imgUrl);
+            setValue("rating", movie.rating)
+            setValue("releaseYear", movie.releaseYear)
+        }
+    }, [movie, setValue])
+    const onSubmit = async (data: IMovie) => {
+        const backendMovie = mapUIMovieToBackendMovie(data);
+        if (isAddMovie) {
+            try {
+                await addMovie(backendMovie);
+                context?.setIsAddedMovie(true);
+            } catch (err) {
+                const message = `Something went wrong during movie adding. Please try again. Error: ${err?.message}`;
+                throw new Error(message);
+            }
+
+        } else {
+            try {
+                const backendMovie = mapUIMovieToBackendMovie(data);
+                backendMovie.id = Number(movieId);
+                await editMovie(backendMovie);
+                context?.setIsEdited(false);
+            } catch (err) {
+                const message = `Something went wrong during movie editing. Please try again. Error: ${err?.message}`;
+                throw new Error(message);
+            }
+
+        }
+        context?.handleOnClose();
+    }
     return (
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="formColumn">
                 <div id="user-input">
+
                     <label>TITLE</label>
-                    <input type="text" value={ movie && movie.movieName}/>
+                    <input
+                        type="text"
+                        {...register("movieName", { required: true })}
+                    />
+                    {errors.movieName && <p style={{ color: 'white' }}>Title is required</p>}
 
                     <label>MOVIE URL</label>
                     <input
                         type="text"
                         placeholder="https://"
+                        {...register("imgUrl", {
+                            required: true,
+                            pattern: /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/,
+                        })}
                     />
+                    {errors.imgUrl && <p style={{ color: 'white' }}>Please check movie URL</p>}
+
                     <label>GENRE</label>
-                    <select name="Select Genre">
-                        <option value="0">Crime</option>
-                        <option value="1">Documuentary</option>
-                        <option value="2">Horror</option>
-                        <option value="2">Comedy</option>
+                    <select
+                        name="Select Genre"
+                        multiple
+                        {...register("relevantGenres", { required: true })}
+                    >
+                        {!isAddMovie ? movie && movie.relevantGenres?.map((genre) =>
+                            <option value={genre}>{genre}</option>) :
+                            <>
+                                <option value="Crime">Crime</option>
+                                <option value="Documentary">Documentary</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Comedy">Comedy</option>
+                            </>
+                        }
+
                     </select>
 
                 </div>
                 <div id="user-input-right">
+
                     <label>RELEASE DATE</label>
-                    <input  type="date" />
+                    <input
+                        type="date"
+                        {...register("releaseYear", { required: true })}
+                    />
 
                     <label>RATING</label>
                     <input
-                        type="number"
+                        type="text"
                         placeholder="7.8"
-                        value={movie && movie.rating}
+                        {...register("rating", {
+                            required: true,
+                            pattern: /^(?:0|[1-9]\d*)(?:\.\d)?$/
+                        })}
                     />
+                    {errors.rating && <p style={{ color: 'white' }}>Please check Rating number</p>}
+
                     <label>RUNTIME</label>
-                    <input type="text" placeholder="minutes" value={movie && movie.duration}/>
+                    <input
+                        type="number"
+                        placeholder="minutes"
+                        {...register("duration", { required: true })}
+                    />
+
                 </div>
             </div>
             <div id="user-input">
+
                 <label>OVERVIEW</label>
                 <textarea className="inputMovieDesc"
-                       type="text"
-                       value={movie && movie.description}
-                       placeholder="Movie Description"
+                          placeholder="Movie Description"
+                          {...register("description", {
+                              required: true,
+                              maxLength: 3000,
+                          })}
                 />
+                {errors.description &&
+                    <p style={{ color: 'white' }}>Overview should contain not more than 3000 symbols</p>}
+
             </div>
             <div className="movieFormButton">
-                <button  className="resetButton">RESET</button>
-                <button onClick={handleSubmit} className="submitButton">SUBMIT</button>
+                <button type="reset" className="resetButton">RESET</button>
+                <button type="submit" className="submitButton">SUBMIT</button>
             </div>
         </form>
     )

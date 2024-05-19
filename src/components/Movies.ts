@@ -10,7 +10,7 @@ export interface IMovie{
     imgUrl: string,
     movieName: string,
     releaseYear: number,
-    relevantGenres?: string[];
+    relevantGenres: string[];
     rating: number,
     duration: string,
     description: string,

@@ -1,17 +1,17 @@
 import React from 'react';
 import "./ContextMenuModal.css"
 import closeButton from "../assets/images/closeButton.png"
-import MovieForm from "./MovieForm";
 import ModalDialog from "./ModalDialog";
 import { useState } from "react";
 import DeleteMovieForm from "./DeleteMovieForm";
+import { useNavigate } from "react-router-dom";
 
-export default function ContextMenuModal({ movie, setIsModalOpen }) {
+export default function ContextMenuModal({ movie, setIsModalOpen, setIsEdited }) {
 
-    const [isEdited, setIsEdited] = useState<boolean>(false);
     const [isDeleted, setIsDeleted] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    function handleCloseButton(event) {
+    function handleOnClose(event) {
         event.stopPropagation();
         setIsModalOpen(false);
     }
@@ -19,6 +19,7 @@ export default function ContextMenuModal({ movie, setIsModalOpen }) {
     function handleEditClick(event) {
         event.stopPropagation();
         setIsEdited(true);
+        navigate(`/${movie.id}/edit`)
     }
 
     function handleDeleteClick(event) {
@@ -28,12 +29,7 @@ export default function ContextMenuModal({ movie, setIsModalOpen }) {
 
     function handleOnCloseForm(event): void {
         event.stopPropagation();
-        setIsEdited(false);
         setIsDeleted(false);
-    }
-
-    function handleSubmit(): void {
-        console.log('SUBMITTED');
     }
 
     function handleConfirm(): void {
@@ -44,7 +40,7 @@ export default function ContextMenuModal({ movie, setIsModalOpen }) {
         <div className="contextMenu">
             <button
                 className="closeButton"
-                onClick={handleCloseButton}>
+                onClick={handleOnClose}>
                 <img className="closeButtonImg" src={closeButton} alt="X"/>
             </button>
             <div className="editAndDeleteContainer">
@@ -54,11 +50,10 @@ export default function ContextMenuModal({ movie, setIsModalOpen }) {
                         className="contextMenuModalButton selectedContextMenuButton">Delete
                 </button>
             </div>
-
-            {isEdited && <ModalDialog title='EDIT MOVIE' onClose={handleOnCloseForm}><MovieForm movie={movie}
-                                                                                                handleSubmit={handleSubmit}/></ModalDialog>}
-            {isDeleted &&  <ModalDialog  isDeleted='true' title='DELETE MOVIE' onClose={handleOnCloseForm}><DeleteMovieForm movie={movie}
-                                                                                                  handleConfirm={handleConfirm}/></ModalDialog>}
+            {isDeleted &&
+                <ModalDialog isDeleted='true' title='DELETE MOVIE' onClose={handleOnCloseForm}><DeleteMovieForm
+                    movie={movie}
+                    handleConfirm={handleConfirm}/></ModalDialog>}
         </div>
     );
 };
