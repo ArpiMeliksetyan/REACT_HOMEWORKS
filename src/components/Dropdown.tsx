@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "../components/DropDown.css"
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, usePathname, useRouter, } from "next/navigation";
 
 const sortingTypes = ['RELEASE DATE', 'TITLE'];
 export const sortingSearchMap = {
@@ -10,18 +10,29 @@ export const sortingSearchMap = {
 
 
 export default function Dropdown() {
-    const [_, setSearchParams] = useSearchParams();
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
 
-    function handleDropdownClick(type) {
-        setSearchParams((prev) => {
-            prev.set("sortBy", sortingSearchMap[type]);
-            return prev;
-        });
+    const createQueryString = useCallback(
+        (name: string, value: string) => {
+            const params = new URLSearchParams(searchParams?.toString() || "");
+
+            params.set(name, value);
+
+                return params.toString();
+        },
+        [searchParams]
+    );
+
+
+    function handleDropdownClick(type: string) {
+        router.push(pathname + '?' + createQueryString("sortBy", sortingSearchMap[type]))
     }
 
     return (
         <div className="dropDownContainer">
-            {sortingTypes.map(type => <button onClick={() => handleDropdownClick(type)}
+            {sortingTypes.map(type => <button key={type} onClick={() => handleDropdownClick(type)}
                                               className="dropDownButton">{type}</button>)}
         </div>
     )

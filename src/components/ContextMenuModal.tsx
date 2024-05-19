@@ -4,12 +4,12 @@ import closeButton from "../assets/images/closeButton.png"
 import ModalDialog from "./ModalDialog";
 import { useState } from "react";
 import DeleteMovieForm from "./DeleteMovieForm";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export default function ContextMenuModal({ movie, setIsModalOpen, setIsEdited }) {
-
     const [isDeleted, setIsDeleted] = useState<boolean>(false);
-    const navigate = useNavigate();
+    const router = useRouter();
+
 
     function handleOnClose(event) {
         event.stopPropagation();
@@ -19,7 +19,7 @@ export default function ContextMenuModal({ movie, setIsModalOpen, setIsEdited })
     function handleEditClick(event) {
         event.stopPropagation();
         setIsEdited(true);
-        navigate(`/${movie.id}/edit`)
+        router.push(`/${movie.id}/edit`)
     }
 
     function handleDeleteClick(event) {
@@ -41,11 +41,10 @@ export default function ContextMenuModal({ movie, setIsModalOpen, setIsEdited })
             <button
                 className="closeButton"
                 onClick={handleOnClose}>
-                <img className="closeButtonImg" src={closeButton} alt="X"/>
+                <img className="closeButtonImg" src={closeButton.src} alt="X"/>
             </button>
             <div className="editAndDeleteContainer">
-                <button onClick={handleEditClick} className="contextMenuModalButton selectedContextMenuButton">Edit
-                </button>
+                <button onClick={handleEditClick} className="contextMenuModalButton selectedContextMenuButton">Edit</button>
                 <button onClick={handleDeleteClick}
                         className="contextMenuModalButton selectedContextMenuButton">Delete
                 </button>

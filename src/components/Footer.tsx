@@ -5,7 +5,7 @@ import React from "react";
 export default function Footer(){
     return (
         <div className='footer'>
-            <img src={netflixroutlette} alt="netflixroutlette"/>
+            <img src={netflixroutlette.src} alt="netflixroutlette"/>
         </div>
     )
 }

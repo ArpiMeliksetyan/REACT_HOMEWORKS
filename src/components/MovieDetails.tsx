@@ -2,25 +2,26 @@ import "./MovieDetails.css"
 import SearchButton from "../assets/images/SearchButton.png"
 import { useEffect, useState, useCallback } from "react";
 import { getMovieById } from "../services/fetchData";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useRouter } from "next/navigation";
 
 export default function MovieDetails() {
     const [selectedMovie, setSelectedMovie] = useState();
-    const { movieId } = useParams();
-    const navigate = useNavigate();
-
+    const params = useParams();
+    const router = useRouter();
 
     const requestMovieById = useCallback(async () => {
-        const movie = await getMovieById({id:  movieId });
-        setSelectedMovie(movie);
-    }, [movieId]);
+        if (params?.movieId) {
+            const movie = await getMovieById(params.movieId as string);
+            setSelectedMovie(movie);
+        }
+    }, [params?.movieId]);
 
     useEffect(() => {
         requestMovieById();
     }, [requestMovieById]);
 
     function handleOnClick() {
-        navigate('/');
+        router.push('/');
     }
 
     const releaseYear = selectedMovie?.release_date.split('-')[0];
@@ -34,7 +35,7 @@ export default function MovieDetails() {
             <div className="movieHeader">
                 <span onClick={handleOnClick} className="mainLogo">netflixroutlette</span>
                 <button className='movieSearchButton'>
-                    <img src={SearchButton} alt="searchButton"/>
+                    <img src={SearchButton.src} alt="searchButton"/>
                 </button>
 
             </div>

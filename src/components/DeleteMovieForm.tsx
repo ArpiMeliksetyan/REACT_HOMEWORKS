@@ -1,6 +1,12 @@
 import "./DeleteMovieForm.css"
+import React from "react";
 
-export default function DeleteMovieForm({ handleConfirmClick }) {
+interface IDeleteMovieForm {
+    handleConfirm: () => void;
+    movie: any;
+}
+
+export default function DeleteMovieForm({ handleConfirm, movie }: IDeleteMovieForm) {
 
     return (
         <>
@@ -8,7 +14,7 @@ export default function DeleteMovieForm({ handleConfirmClick }) {
                 <h3 className="deleteConfirmation">Are you sure you want to delete this movie?</h3>
             </div>
             <div className='deleteButtonContainer'>
-                <button className="deleteButton" onClick={handleConfirmClick}>CONFIRM</button>
+                <button className="deleteButton" onClick={handleConfirm}>CONFIRM</button>
             </div>
         </>
     )
