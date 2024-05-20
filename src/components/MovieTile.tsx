@@ -15,7 +15,8 @@ export default function MovieTile({
                                           runtime: duration,
                                       },
                                       onClickDetails,
-                                      setIsEdited
+                                      setIsEdited,
+                                      isEdited,
                                   }) {
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -61,11 +62,11 @@ export default function MovieTile({
                         onClick={handlePopupClick}>
                         <img
                             className="popupImagine"
-                            src={PopupButton}
+                            src={PopupButton.src}
                             alt="PopupButton"/>
                     </span>
                 }
-                {(isModalOpen) && <ContextMenuModal movie={movie} setIsModalOpen={setIsModalOpen} setIsEdited={setIsEdited}/>}
+                {(isModalOpen) && <ContextMenuModal  movie={movie} setIsModalOpen={setIsModalOpen} setIsEdited={setIsEdited} isEdited={isEdited}/>}
                 <div className="movieDetails">
                     <span className="movieName">{movieName}</span>
                     <span className="movieReleaseYear">{releaseYear}</span>

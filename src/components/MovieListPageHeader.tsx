@@ -2,10 +2,10 @@ import Header from "./Header/Header";
 import SearchForm from "./SearchForm";
 import { getMovies } from "../services/fetchData";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "next/navigation";
 
 export default function MovieListPageHeader() {
-    const [searchParams] = useSearchParams();
+    const searchParams = useSearchParams();
 
     return (
         <div className="headerContainer">
